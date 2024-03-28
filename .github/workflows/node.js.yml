@@ -1,0 +1,26 @@
+name: Build Scripts
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Specify the operating system
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Action to checkout the code repository
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2  # Action to set up Node.js environment
+        with:
+          node-version: '20.7.0'  # Specify the Node.js version you want to use
+
+      - name: Install dependencies
+        run: npm i --legacy-peer-deps
+
+      - name: Build
+        run: npm run build  # Run npm build script
